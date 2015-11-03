@@ -16,18 +16,18 @@ xpReader.LoadFile("example.xp");
 RexTileMap* tilemap = xpReader.GetTileMap();
 ```
 
-As like Baconsoap's library, the tilemap structure is as follows.
+As like Baconsoap's library, the tilemap structure is as follows. The amount of RexTileLayers is 4, however it's advised to use GetLayerCount() for the exact amount of layers in an image, (any non-existant layers are NULL by default). The amount of RexTiles in a RexTileLayer is (LayerWidth*LayerHeight), you can access the layer width and height by calling GetLayerWidth(layer) and GetLayerHeight(layer). It's best to access a specific tile by using: x + (y * width).
 ```
-| TileMap
-| | TileLayer[] Layers
-| | | Tile[,] Tiles
-| | | | byte CharacterCode
-| | | | byte ForegroundRed
-| | | | byte ForegroundGreen
-| | | | byte ForegroundBlue
-| | | | byte BackgroundRed
-| | | | byte BackgroundGreen
-| | | | byte BackgroundBlue
+| RexTileMap
+| | RexTileLayer[] Layers
+| | | RexTile[] Tiles
+| | | | int CharacterCode
+| | | | unsigned char ForegroundRed
+| | | | unsigned char ForegroundGreen
+| | | | unsigned char ForegroundBlue
+| | | | unsigned char BackgroundRed
+| | | | unsigned char BackgroundGreen
+| | | | unsigned char BackgroundBlue
 ```
 
 XPText aims to have similar syntax and functionality as SFML's Text class, as such the usage is very similar.
@@ -46,7 +46,7 @@ xpText.setPosition(20.0f, 40.0f));
 
 \\Changing Tint
 text.setColor(sf::Color::Red);
-xpText.setColour(sf::Color::Red);
+xpText.setColor(sf::Color::Red);
 
 \\Render
 window.draw(text);
