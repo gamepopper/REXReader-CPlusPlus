@@ -53,11 +53,6 @@ window.draw(text);
 window.draw(xpText);
 ```
 
-### Current Issues
-* Dependancy on zlib - Currently I cannot find a way to decompress gzip binary files without using zlib or other external libraries.
-* Font Support - SFML only has built-in support for TrueType Fonts (although many developers have implemented their own Bitmap Font classes). Currently the CP437 fontset is fully supported in the class, as is with REXPaint, although other fixed-width TTF fonts may also work assuming they have all the supported characters.
-
-
 ## Licensing
 > The MIT License (MIT)
 
