@@ -140,16 +140,16 @@ namespace sf
 			for (int x = 0; x < width; x++)
 				for (int y = 0; y < height; y++)
 				{
-					RexTile& tile = tilemap->Layers[layer]->Tiles[x + (y * width)];
+					RexTile* tile = tilemap->Layers[layer]->Tiles[x + (y * width)].get();
 					
-					if (tile.BackgroundRed == 255 &&
-						tile.BackgroundGreen == 0 &&
-						tile.BackgroundBlue == 255)
+					if (tile->BackgroundRed == 255 &&
+						tile->BackgroundGreen == 0 &&
+						tile->BackgroundBlue == 255)
 					{
 						continue;
 					}
 
-					sf::Glyph glyph = font->getGlyph(tile.CharacterCode, characterSize, false);
+					sf::Glyph glyph = font->getGlyph(tile->CharacterCode, characterSize, false);
 
 					float left = glyph.bounds.left;
 					float top = glyph.bounds.top;
@@ -161,8 +161,8 @@ namespace sf
 					float u2 = static_cast<float>(glyph.textureRect.left + glyph.textureRect.width);
 					float v2 = static_cast<float>(glyph.textureRect.top + glyph.textureRect.height);
 
-					sf::Color foreground = sf::Color(tile.ForegroundRed, tile.ForegroundGreen, tile.ForegroundBlue, 255) * tint;
-					sf::Color background = sf::Color(tile.BackgroundRed, tile.BackgroundGreen, tile.BackgroundBlue, 255) * tint;
+					sf::Color foreground = sf::Color(tile->ForegroundRed, tile->ForegroundGreen, tile->ForegroundBlue, 255) * tint;
+					sf::Color background = sf::Color(tile->BackgroundRed, tile->BackgroundGreen, tile->BackgroundBlue, 255) * tint;
 
 
 					vertices.append(sf::Vertex(Vector2f((x*hspace) + 0,			(y*vspace) + topOffset),	background));

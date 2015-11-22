@@ -149,7 +149,7 @@ RexTileMap* RexReader::GetTileMap()
 	catch (int e)
 	{
 		Dispose();
-		throw("Bad .xp file");
+		throw("Bad .xp file " + e);
 	}
 
 	auto map = new RexTileMap(width, height, layers);
@@ -161,14 +161,15 @@ RexTileMap* RexReader::GetTileMap()
 		for (unsigned int x = 0; x < width; x++)
 			for (unsigned int y = 0; y < height; y++)
 			{
-				RexTile& tile = map->Layers[layer]->Tiles[x + (y * width)];
-				tile.CharacterCode = GetInt(filestream);
-				tile.ForegroundRed = GetChar(filestream);
-				tile.ForegroundGreen = GetChar(filestream);
-				tile.ForegroundBlue = GetChar(filestream);
-				tile.BackgroundRed = GetChar(filestream);
-				tile.BackgroundGreen = GetChar(filestream);
-				tile.BackgroundBlue = GetChar(filestream);
+				std::unique_ptr<RexTile> tile = make_unique<RexTile>();
+				tile->CharacterCode = GetInt(filestream);
+				tile->ForegroundRed = GetChar(filestream);
+				tile->ForegroundGreen = GetChar(filestream);
+				tile->ForegroundBlue = GetChar(filestream);
+				tile->BackgroundRed = GetChar(filestream);
+				tile->BackgroundGreen = GetChar(filestream);
+				tile->BackgroundBlue = GetChar(filestream);
+				map->Layers[layer]->Tiles[x + (y * width)] = std::move(tile);
 			}
 		offset = 16 + (10 * width * height) + 8;
 		gzseek(filestream, offset, SEEK_SET);
