@@ -12,6 +12,7 @@ INT WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, INT)
 #endif
 
 #include <iostream>
+#include <sstream>
 #include <SFML/Graphics.hpp>
 #include "XPText.hpp"
 
@@ -25,8 +26,16 @@ int main()
 	sf::Text text("REXPaint Reader and SFML XPText - Gamepopper 2015", font, 12);
 	text.setPosition(sf::Vector2f(320.0f - text.getLocalBounds().width / 2, 0.0f));
 
+	sf::Clock clock;
 	sf::XPText xpText("test.xp", font, 10);
+	sf::Int64 timeElapsed = clock.getElapsedTime().asMicroseconds();
 	xpText.setPosition(320.0f - (xpText.getLocalBounds().width / 2), 360.0f - (xpText.getLocalBounds().height / 2));
+
+	std::stringstream ss;
+	ss << "Time to Generate: " << timeElapsed << " microseconds";
+
+	sf::Text timeTaken(ss.str(), font, 12);
+	timeTaken.setPosition(sf::Vector2f(320.0f - timeTaken.getLocalBounds().width / 2, 700.0f));
 
 	while (window.isOpen())
 	{
@@ -39,6 +48,7 @@ int main()
 
 		window.clear();
 		window.draw(text);
+		window.draw(timeTaken);
 		window.draw(xpText);
 		window.display();
 	}
