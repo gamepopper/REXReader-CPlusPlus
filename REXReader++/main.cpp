@@ -17,8 +17,6 @@ INT WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, INT)
 
 int main()
 {
-	SetConsoleTitle(TEXT("RexReader++"));
-
 	sf::RenderWindow window(sf::VideoMode(640, 720), "RexReader++ Test");
 
 	sf::Font font;
