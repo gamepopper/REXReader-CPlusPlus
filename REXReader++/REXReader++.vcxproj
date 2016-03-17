@@ -89,8 +89,8 @@
     <ClCompile Include="XPText.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="face.xp" />
     <None Include="LayerTest.xp" />
+    <None Include="test.xp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RexReader.h" />
