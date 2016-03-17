@@ -171,7 +171,7 @@ RexTileMap* RexReader::GetTileMap()
 				tile->BackgroundBlue = GetChar(filestream);
 				map->Layers[layer]->Tiles[x + (y * width)] = std::move(tile);
 			}
-		offset = 16 + (10 * width * height) + 8;
+		offset = 16 + ((10 * width * height) + 8) * (layer + 1);
 		gzseek(filestream, offset, SEEK_SET);
 	}
 

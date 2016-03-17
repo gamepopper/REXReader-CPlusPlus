@@ -27,7 +27,7 @@ int main()
 	text.setPosition(sf::Vector2f(320.0f - text.getLocalBounds().width / 2, 0.0f));
 
 	sf::Clock clock;
-	sf::XPText xpText("test.xp", font, 10);
+	sf::XPText xpText("LayerTest.xp", font, 10);
 	sf::Int64 timeElapsed = clock.getElapsedTime().asMicroseconds();
 	xpText.setPosition(320.0f - (xpText.getLocalBounds().width / 2), 360.0f - (xpText.getLocalBounds().height / 2));
 

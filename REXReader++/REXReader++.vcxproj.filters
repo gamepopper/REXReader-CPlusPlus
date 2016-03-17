@@ -26,10 +26,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="test.xp">
+    <None Include="face.xp">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="face.xp">
+    <None Include="LayerTest.xp">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
