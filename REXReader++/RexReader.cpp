@@ -156,20 +156,17 @@ RexTileMap* RexReader::GetTileMap()
 	int offset = 16;
 	gzseek(filestream, offset, SEEK_SET);
 
+	//A single tile is 4 bytes for the character code and 6 bytes for the colors.
+	const int bufferLen = 10;
+	Byte buffer[bufferLen];
 	for (unsigned int layer = 0; layer < layers; layer++)
 	{
 		for (unsigned int x = 0; x < width; x++)
 			for (unsigned int y = 0; y < height; y++)
 			{
-				std::unique_ptr<RexTile> tile = make_unique<RexTile>();
-				tile->CharacterCode = GetInt(filestream);
-				tile->ForegroundRed = GetChar(filestream);
-				tile->ForegroundGreen = GetChar(filestream);
-				tile->ForegroundBlue = GetChar(filestream);
-				tile->BackgroundRed = GetChar(filestream);
-				tile->BackgroundGreen = GetChar(filestream);
-				tile->BackgroundBlue = GetChar(filestream);
-				map->Layers[layer]->Tiles[x + (y * width)] = std::move(tile);
+				RexTile* tile = &map->Layers[layer]->Tiles[x + (y * width)];
+				gzread(filestream, buffer, bufferLen);
+				memcpy(tile, buffer, bufferLen);
 			}
 		offset = 16 + ((10 * width * height) + 8) * (layer + 1);
 		gzseek(filestream, offset, SEEK_SET);

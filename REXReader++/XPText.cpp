@@ -140,7 +140,7 @@ namespace sf
 			for (int x = 0; x < width; x++)
 				for (int y = 0; y < height; y++)
 				{
-					RexTile* tile = tilemap->Layers[layer]->Tiles[x + (y * width)].get();
+					RexTile* tile = &tilemap->Layers[layer]->Tiles[x + (y * width)];
 					
 					if (tile->BackgroundRed == 255 &&
 						tile->BackgroundGreen == 0 &&
@@ -179,6 +179,8 @@ namespace sf
 					vertices.append(sf::Vertex(Vector2f((x*hspace) + right,		(y*vspace) + top),		foreground, Vector2f(u2, v1)));
 					vertices.append(sf::Vertex(Vector2f((x*hspace) + right,		(y*vspace) + bottom),	foreground, Vector2f(u2, v2)));
 				}
+
+		delete(tilemap);
 
 		bounds.left = 0;
 		bounds.top = topOffset;
