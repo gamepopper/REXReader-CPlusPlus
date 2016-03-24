@@ -4,12 +4,12 @@
 struct RexTile
 {
 	unsigned int CharacterCode;
-	unsigned int BackgroundRed;
-	unsigned int BackgroundGreen;
-	unsigned int BackgroundBlue;
-	unsigned int ForegroundRed;
-	unsigned int ForegroundGreen;
-	unsigned int ForegroundBlue;
+	unsigned char ForegroundRed;
+	unsigned char ForegroundGreen;
+	unsigned char ForegroundBlue;
+	unsigned char BackgroundRed;
+	unsigned char BackgroundGreen;
+	unsigned char BackgroundBlue;
 };
 
 class RexTileLayer
