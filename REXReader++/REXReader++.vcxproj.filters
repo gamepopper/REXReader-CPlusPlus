@@ -26,10 +26,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="LayerTest.xp">
+    <None Include="gp.xp">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="test.xp">
+    <None Include="layers.xp">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
@@ -52,9 +52,6 @@
   </ItemGroup>
   <ItemGroup>
     <Font Include="cp437-8x8.ttf">
-      <Filter>Resource Files</Filter>
-    </Font>
-    <Font Include="lucon.ttf">
       <Filter>Resource Files</Filter>
     </Font>
   </ItemGroup>
