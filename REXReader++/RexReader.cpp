@@ -1,4 +1,5 @@
 #include "RexReader.h"
+#include <iostream>
 using namespace std;
 
 int RexReader::GetInt(gzFile& in, int position)
@@ -70,6 +71,8 @@ bool RexReader::LoadFile(std::string filename)
 			layerSizes[i][j] = -1;
 		}
 	}
+
+	disposed = false;
 
 	return true;
 }
@@ -149,7 +152,7 @@ RexTileMap* RexReader::GetTileMap()
 	catch (int e)
 	{
 		Dispose();
-		throw("Bad .xp file " + e);
+		throw("Bad .xp file: %d", e);
 	}
 
 	auto map = new RexTileMap(width, height, layers);

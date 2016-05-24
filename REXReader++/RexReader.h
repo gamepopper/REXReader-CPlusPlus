@@ -15,9 +15,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
 #include "RexTile.h"
-#include <iostream>
 #include "zlib.h"
-#include "zconf.h"
 
 class RexReader
 {
