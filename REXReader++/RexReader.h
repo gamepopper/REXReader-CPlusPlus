@@ -26,7 +26,7 @@ private:
 
 	bool disposed = false;
 	int layerCount = -1;
-	int layerSizes[4][2];
+	int layerSizes[2];
 
 	int GetInt(gzFile& in, int position = -1);
 	unsigned char GetChar(gzFile& in, int position = -1);
@@ -40,8 +40,8 @@ public:
 	void Dispose();
 
 	int GetLayerCount();
-	int GetLayerWidth(int layer);
-	int GetLayerHeight(int layer);
+	int GetLayerWidth();
+	int GetLayerHeight();
 
 	RexTileMap* GetTileMap();
 };

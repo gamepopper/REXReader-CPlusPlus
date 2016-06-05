@@ -121,8 +121,8 @@ namespace sf
 		if (layers == 0)
 			return;
 
-		int width = xpReader.GetLayerWidth(0);
-		int height = xpReader.GetLayerHeight(0);
+		int width = xpReader.GetLayerWidth();
+		int height = xpReader.GetLayerHeight();
 
 		RexTileMap* tilemap = xpReader.GetTileMap();
 

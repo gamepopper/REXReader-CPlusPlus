@@ -64,12 +64,9 @@ bool RexReader::LoadFile(std::string filename)
 	}
 
 	layerCount = -1;
-	for (unsigned int i = 0; i < 4; i++)
+	for (unsigned int i = 0; i < 2; i++)
 	{
-		for (unsigned int j = 0; j < 2; j++)
-		{
-			layerSizes[i][j] = -1;
-		}
+		layerSizes[i] = -1;
 	}
 
 	disposed = false;
@@ -96,44 +93,34 @@ int RexReader::GetLayerCount()
 	return layerCount;
 }
 
-int RexReader::GetLayerWidth(int layer)
+int RexReader::GetLayerWidth()
 {
 	CheckDisposed();
 
-	if (layer < 0 || layer >= GetLayerCount())
+	if (layerSizes[0] > 0)
 	{
-		throw ("Layer out of bounds");
+		return layerSizes[0];
 	}
 
-	if (layerSizes[layer][0] > 0)
-	{
-		return layerSizes[layer][0];
-	}
+	int offset = (layerCountOffset * 8 + 32)/8;
+	layerSizes[0] = GetInt(filestream, offset);
 
-	int offset = (layerCountOffset * 8 + 32 + layer * 64)/8;
-	layerSizes[layer][0] = GetInt(filestream, offset);
-
-	return layerSizes[layer][0];
+	return layerSizes[0];
 }
 
-int RexReader::GetLayerHeight(int layer)
+int RexReader::GetLayerHeight()
 {
 	CheckDisposed();
 
-	if (layer < 0 || layer > GetLayerCount())
+	if (layerSizes[1] > 0)
 	{
-		throw ("Layer out of bounds");
+		return layerSizes[1];
 	}
 
-	if (layerSizes[layer][1] > 0)
-	{
-		return layerSizes[layer][1];
-	}
+	int offset = (layerCountOffset * 8 + 32 + 32)/8;
+	layerSizes[1] = GetInt(filestream, offset);
 
-	int offset = (layerCountOffset * 8 + 32 + 32 + layer * 64)/8;
-	layerSizes[layer][1] = GetInt(filestream, offset);
-
-	return layerSizes[layer][1];
+	return layerSizes[1];
 }
 
 RexTileMap* RexReader::GetTileMap()
@@ -146,8 +133,8 @@ RexTileMap* RexReader::GetTileMap()
 	try
 	{
 		layers = GetLayerCount();
-		width = GetLayerWidth(0);
-		height = GetLayerHeight(0);
+		width = GetLayerWidth();
+		height = GetLayerHeight();
 	}
 	catch (int e)
 	{
