@@ -151,15 +151,9 @@ RexTileMap* RexReader::GetTileMap()
 		for (unsigned int x = 0; x < width; x++)
 			for (unsigned int y = 0; y < height; y++)
 			{
-				std::unique_ptr<RexTile> tile = make_unique<RexTile>();
-				tile->CharacterCode = GetInt(filestream);
-				tile->ForegroundRed = GetChar(filestream);
-				tile->ForegroundGreen = GetChar(filestream);
-				tile->ForegroundBlue = GetChar(filestream);
-				tile->BackgroundRed = GetChar(filestream);
-				tile->BackgroundGreen = GetChar(filestream);
-				tile->BackgroundBlue = GetChar(filestream);
-				map->Layers[layer]->Tiles[x + (y * width)] = std::move(tile);
+				RexTile* tile = new RexTile();
+				gzread(filestream, tile, 10);
+				map->Layers[layer]->Tiles[x + (y * width)] = std::unique_ptr<RexTile>(tile);
 			}
 		offset = 16 + ((10 * width * height) + 8) * (layer + 1);
 		gzseek(filestream, offset, SEEK_SET);
