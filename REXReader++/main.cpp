@@ -15,6 +15,7 @@ INT WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, INT)
 #include <sstream>
 #include <SFML/Graphics.hpp>
 #include "XPText.hpp"
+#include "RexReader.h"
 
 int main()
 {
@@ -36,6 +37,18 @@ int main()
 
 	sf::Text timeTaken(ss.str(), font, 12);
 	timeTaken.setPosition(sf::Vector2f(320.0f - timeTaken.getLocalBounds().width / 2, 700.0f));
+
+	RexReader reader;
+	reader.LoadFile("40x40.xp");
+	clock.restart();
+	reader.GetTileMap();
+	std::cout << "Load 40x40.xp time: " << clock.getElapsedTime().asMicroseconds() / 1000.0f << " Milliseconds" << std::endl;
+	reader.Dispose();
+	reader.LoadFile("80x80.xp");
+	clock.restart();
+	reader.GetTileMap();
+	std::cout << "Load 80x80.xp time: " << clock.getElapsedTime().asMicroseconds() / 1000.0f << " Milliseconds" << std::endl;
+	reader.Dispose();
 
 	while (window.isOpen())
 	{
